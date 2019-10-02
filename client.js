@@ -36,6 +36,8 @@ const employees = [
 
 function bonusCalculator(inputEmployee) {
   console.log("calculating bonus");
+  console.log("calculating bonus");
+  Number(inputEmployee.annualSalary);
   let bonus = 0;
   if ((inputEmployee.reviewRating) <= 2) {
     bonus = 0
@@ -61,7 +63,11 @@ function bonusCalculator(inputEmployee) {
   if (bonus <= 0) {
     bonus = 0;
   }
-  return bonus
+  if ((bonus/inputEmployee.annualSalary) > .13) {
+    let bonus = inputEmployee.annualSalary*.13
+  }
+  console.log(bonus);
+  return Number(bonus)
 }
 // ### Individual Bonus calculation
 //Those who have a rating of a 2 or below should not receive a bonus.
@@ -79,13 +85,18 @@ function bonusCalculator(inputEmployee) {
 function makeObject(inputEmployee) {
   console.log("running makeObject");
   let bonus = bonusCalculator(inputEmployee);
+ 
+
   return {
     name: inputEmployee.name,
-    bonusPercentage: inputEmployee.annualSalary/bonus,
-    totalCompensation: inputEmployee.annualSalary+bonus,
-    totalBonus: bonus
+    totalSalary: Number(inputEmployee.annualSalary),
+    //something was messed up so I added this to see it easier
+    bonusPercentage: bonus/inputEmployee.annualSalary,
+    totalCompensation: Number(inputEmployee.annualSalary) + bonus,
+    totalBonus: Math.round(bonus)
   }
 }
+
 //* The `name` property should contain the employee's name.
 //* The `bonusPercentage` property should contain the bonus percentage the employee is to receive. 
 //See section below for calculation instructions.
